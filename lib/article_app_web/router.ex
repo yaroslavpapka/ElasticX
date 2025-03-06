@@ -17,11 +17,11 @@ defmodule ArticleAppWeb.Router do
   scope "/", ArticleAppWeb do
     pipe_through :browser
 
-    live "/articles", ArticleLive.Index, :index
-    live "/articles/new", ArticleLive.Index, :new
-    live "/articles/:id/edit", ArticleLive.Index, :edit
-    live "/articles/:id/", ArticleLive.Show, :show
-    live "/articles/:id/show/edit", ArticleLive.Show, :edit
+    live "/", ArticleLive.Index, :index
+    live "/new", ArticleLive.Index, :new
+    live "/:id/edit", ArticleLive.Index, :edit
+    live "/:id/", ArticleLive.Show, :show
+    live "/:id/show/edit", ArticleLive.Show, :edit
 
     get "/", PageController, :home
   end

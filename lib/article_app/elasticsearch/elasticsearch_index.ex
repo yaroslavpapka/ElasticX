@@ -3,6 +3,7 @@ defmodule ArticleApp.Elasticsearch.Index do
   require Logger
 
   @index_name "articles"
+  
   @mapping %{
     "settings" => %{
       "number_of_shards" => 1,
@@ -29,6 +30,10 @@ defmodule ArticleApp.Elasticsearch.Index do
       {:ok, _} -> {:error, "Index already exists"}
       _ -> Elasticsearch.put(ElasticsearchCluster, "/#{@index_name}", @mapping)
     end
+  end
+
+  def delete_index do
+    Elasticsearch.delete(ElasticsearchCluster, "/#{@index_name}")
   end
 
   def delete_all_documents do

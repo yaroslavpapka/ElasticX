@@ -12,31 +12,31 @@ defmodule ArticleAppWeb.ArticleLiveTest do
   end
 
   test "renders article listing page", %{conn: conn} do
-    {:ok, _view, html} = live(conn, ~p"/articles")
+    {:ok, _view, html} = live(conn, ~p"/")
     assert html =~ "Listing Articles"
   end
 
   test "search filters articles", %{conn: conn, article: article} do
-    {:ok, view, _html} = live(conn, ~p"/articles")
+    {:ok, view, _html} = live(conn, ~p"/")
 
     view |> form("form", %{author: article.author_name}) |> render_submit()
   end
 
   test "opens new article modal", %{conn: conn} do
-    {:ok, view, _html} = live(conn, ~p"/articles")
+    {:ok, view, _html} = live(conn, ~p"/")
     view |> element("a", "New Article") |> render_click()
-    assert_patch(view, ~p"/articles/new")
+    assert_patch(view, ~p"/new")
   end
 
   test "creates a new article", %{conn: conn} do
-    {:ok, view, _html} = live(conn, ~p"/articles/new")
+    {:ok, view, _html} = live(conn, ~p"/new")
     view |> form("#article-form", article: @valid_attrs) |> render_submit()
   end
 
   test "edits an article", %{conn: conn, article: article} do
-    {:ok, view, _html} = live(conn, ~p"/articles/#{article.id}/edit")
+    {:ok, view, _html} = live(conn, ~p"/#{article.id}/edit")
     view |> form("#article-form", article: %{title: "Updated Title"}) |> render_submit()
-    assert_patch(view, ~p"/articles")
+    assert_patch(view, ~p"/")
     assert has_element?(view, "td", "Updated Title")
   end
 end

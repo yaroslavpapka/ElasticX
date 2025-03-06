@@ -1,7 +1,7 @@
 <.header class="flex items-center justify-between bg-gray-800 text-white p-4 rounded-lg shadow-md">
   <h1 class="text-xl font-semibold">Listing Articles</h1>
   <:actions>
-    <.link patch={~p"/articles/new"}>
+    <.link patch={~p"/new"}>
       <.button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow">New Article</.button>
     </.link>
   </:actions>
@@ -18,7 +18,7 @@
 <.table
   id="articles"
   rows={@streams.articles}
-  row_click={fn {_id, article} -> JS.navigate(~p"/articles/#{article}") end}
+  row_click={fn {_id, article} -> JS.navigate(~p"/#{article}") end}
 >
   <:col :let={{_id, article}} label="Title">{article.title}</:col>
   <:col :let={{_id, article}} label="Content">{article.content}</:col>
@@ -41,9 +41,9 @@
   <:col :let={{_id, article}} label="Label">{article.label}</:col>
   <:action :let={{_id, article}}>
     <div class="sr-only">
-      <.link navigate={~p"/articles/#{article}"}>Show</.link>
+      <.link navigate={~p"/#{article}"}>Show</.link>
     </div>
-    <.link patch={~p"/articles/#{article}/edit"}>Edit</.link>
+    <.link patch={~p"/#{article}/edit"}>Edit</.link>
   </:action>
   <:action :let={{id, article}}>
     <.link
@@ -55,13 +55,13 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="article-modal" show on_cancel={JS.patch(~p"/articles")}>
+<.modal :if={@live_action in [:new, :edit]} id="article-modal" show on_cancel={JS.patch(~p"/")}>
   <.live_component
     module={ArticleAppWeb.ArticleLive.FormComponent}
     id={@article.id || :new}
     title={@page_title}
     action={@live_action}
     article={@article}
-    patch={~p"/articles"}
+    patch={~p"/"}
   />
 </.modal>
