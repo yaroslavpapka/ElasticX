@@ -1,6 +1,6 @@
 # ArticleApp
 
-![Demo Video](https://youtu.be/I5GdriL-PRo)
+[![Demo Video](https://img.youtube.com/vi/I5GdriL-PRo/maxresdefault.jpg)](https://www.youtube.com/watch?v=I5GdriL-PRo)
 
 Understand the principles of how Elasticsearch works.
 Set up PostgreSQL and Elasticsearch using Docker.
