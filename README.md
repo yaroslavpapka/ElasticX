@@ -1,7 +1,18 @@
 # ArticleApp
 
+![Demo Video](https://youtu.be/I5GdriL-PRo)
+
+Understand the principles of how Elasticsearch works.
+Set up PostgreSQL and Elasticsearch using Docker.
+Create an Elixir project with a page displaying a table of articles, including the author's name, publish/unpublish status, tags, publication date, creation date, update date, and a label (where we'll store the article URL).
+Add buttons and modals for creating, updating, and deleting articles.
+Fetch articles and implement search by author and text using Elasticsearch.
+Ensure that create/update/delete requests affect both the database and Elasticsearch.
+Cover the project with tests.
+
 To start your Phoenix server:
 
+  * Run `sudo docker compose up -d` to install and setup dependencies
   * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
