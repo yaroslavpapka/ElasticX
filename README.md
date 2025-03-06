@@ -12,6 +12,7 @@
 
 To start your Phoenix server:
 
+  * Run mix deps.get
   * Run `sudo docker compose up -d` to install and setup dependencies
   * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
