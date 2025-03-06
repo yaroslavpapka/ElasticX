@@ -1,0 +1,34 @@
+<.header>
+  Article {@article.id}
+  <:subtitle>This is a article record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/articles/#{@article}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit article</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Title">{@article.title}</:item>
+  <:item title="Content">{@article.content}</:item>
+  <:item title="Author name">{@article.author_name}</:item>
+  <:item title="Published">{@article.published}</:item>
+  <:item title="Tags">{@article.tags}</:item>
+  <:item title="Published at">{@article.published_at}</:item>
+  <:item title="Inserted at">{@article.inserted_at}</:item>
+  <:item title="Updated at">{@article.updated_at}</:item>
+  <:item title="Label">{@article.label}</:item>
+</.list>
+
+<.back navigate={~p"/articles"}>Back to articles</.back>
+
+<.modal :if={@live_action == :edit} id="article-modal" show on_cancel={JS.patch(~p"/articles/#{@article}")}>
+  <.live_component
+    module={ArticleAppWeb.ArticleLive.FormComponent}
+    id={@article.id}
+    title={@page_title}
+    action={@live_action}
+    article={@article}
+    patch={~p"/articles/#{@article}"}
+  />
+</.modal>

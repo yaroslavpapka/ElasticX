@@ -1,0 +1,67 @@
+<.header class="flex items-center justify-between bg-gray-800 text-white p-4 rounded-lg shadow-md">
+  <h1 class="text-xl font-semibold">Listing Articles</h1>
+  <:actions>
+    <.link patch={~p"/articles/new"}>
+      <.button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow">New Article</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<form phx-submit="search_articles" class="mb-4 flex space-x-2 bg-gray-100 p-4 rounded-lg shadow">
+  <input class="border border-gray-300 rounded px-2 py-1 w-1/3" type="text" name="author" placeholder="Search by author" value={@search_author} />
+  <input class="border border-gray-300 rounded px-2 py-1 w-1/3" type="text" name="tag" placeholder="Search by tag" value={@search_tag} />
+  <input class="border border-gray-300 rounded px-2 py-1 w-1/3" type="text" name="content" placeholder="Search by content" value={@search_content} />
+  <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow">Search</button>
+</form>
+
+
+<.table
+  id="articles"
+  rows={@streams.articles}
+  row_click={fn {_id, article} -> JS.navigate(~p"/articles/#{article}") end}
+>
+  <:col :let={{_id, article}} label="Title">{article.title}</:col>
+  <:col :let={{_id, article}} label="Content">{article.content}</:col>
+  <:col :let={{_id, article}} label="Author name">{article.author_name}</:col>
+  <:col :let={{_id, article}} label="Published">{article.published}</:col>
+  <:col :let={{_id, article}} label="Tags">
+    <%= format_tags(article.tags) %>
+  </:col>
+  <:col :let={{_id, article}} label="Published at">
+    <%= format_datetime(article.published_at) %>
+  </:col>
+  
+  <:col :let={{_id, article}} label="Inserted at">
+    <%= format_datetime(article.inserted_at) %>
+  </:col>
+  
+  <:col :let={{_id, article}} label="Updated at">
+    <%= format_datetime(article.updated_at) %>
+  </:col>>
+  <:col :let={{_id, article}} label="Label">{article.label}</:col>
+  <:action :let={{_id, article}}>
+    <div class="sr-only">
+      <.link navigate={~p"/articles/#{article}"}>Show</.link>
+    </div>
+    <.link patch={~p"/articles/#{article}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, article}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: article.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="article-modal" show on_cancel={JS.patch(~p"/articles")}>
+  <.live_component
+    module={ArticleAppWeb.ArticleLive.FormComponent}
+    id={@article.id || :new}
+    title={@page_title}
+    action={@live_action}
+    article={@article}
+    patch={~p"/articles"}
+  />
+</.modal>
