@@ -16,7 +16,6 @@ defmodule ArticleAppWeb.ArticleLive.FormComponent do
         for={@form}
         id="article-form"
         phx-target={@myself}
-        phx-change="validate"
         phx-submit="save"
       >
         <.input field={@form[:title]} type="text" label="Title" />
