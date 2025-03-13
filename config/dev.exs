@@ -1,8 +1,18 @@
 import Config
 
 # Configure your database
+
+config :article_app, ArticleApp.Repo,
+  username: System.get_env("DB_USERNAME") || "myuser",
+  password: System.get_env("DB_PASSWORD") || "mypassword",
+  hostname: System.get_env("DB_HOST") || "localhost",
+  database: System.get_env("DB_NAME") || "mydatabase",
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
 config :article_app, ArticleApp.ElasticsearchCluster,
-  url: "http://localhost:9200",
+  url: System.get_env("ELASTICSEARCH_URL") || "http://localhost:9200",
   json_library: Jason,
   api: Elasticsearch.API.HTTP
 
