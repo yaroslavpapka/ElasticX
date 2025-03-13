@@ -1,4 +1,4 @@
-# 🚀 RedisProject
+# 🚀 ElasticSearchProject
 ## 📌 Overview
 RedisProject is a Phoenix-based web application that utilizes PostgreSQL and Elasticsearch for managing articles. The app allows users to create, update, delete, and search articles efficiently. 📝🔍
 
