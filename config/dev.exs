@@ -1,15 +1,6 @@
 import Config
 
 # Configure your database
-config :article_app, ArticleApp.Repo,
-  username: "myuser",
-  password: "mypassword",
-  hostname: "localhost",
-  database: "mydatabase",
-  stacktrace: true,
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
-
 config :article_app, ArticleApp.ElasticsearchCluster,
   url: "http://localhost:9200",
   json_library: Jason,
