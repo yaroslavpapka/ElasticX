@@ -1,8 +1,14 @@
-# ArticleApp
+# 🚀 RedisProject
+## 📌 Overview
+RedisProject is a Phoenix-based web application that utilizes PostgreSQL and Elasticsearch for managing articles. The app allows users to create, update, delete, and search articles efficiently. 📝🔍
 
+## ✨ Features
+- 📰 Article management with fields: title, author name, publish status, tags, publication date, creation date, update date, and label (URL to article).
+- 🔎 Search functionality via Elasticsearch (by author or full-text search).
+- 🛢️ PostgreSQL and Elasticsearch integration.
+- 🎨 Modal-based UI for creating, updating, and deleting articles.
 [![Demo Video](https://img.youtube.com/vi/I5GdriL-PRo/maxresdefault.jpg)](https://youtu.be/9V5CUrgC1P0)
 
-  * Understand the principles of how Elasticsearch works.
   * Set up PostgreSQL and Elasticsearch using Docker.
   * Create an Elixir project with a page displaying a table of articles, including the author's name, publish/unpublish status, tags, publication date, creation date, update date, and a label (where we'll store the article URL).
   * Add buttons and modals for creating, updating, and deleting articles.
