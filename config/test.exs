@@ -6,19 +6,20 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :article_app, ArticleApp.Repo,
-  username: "myuser",
-  password: "mypassword",
-  hostname: "localhost",
-  database: "mydatabase_test",
-  port: "5433",
+  username: System.get_env("DB_USERNAME") || "myuser",
+  password: System.get_env("DB_PASSWORD") || "mypassword",
+  hostname: System.get_env("DB_HOST") || "localhost",
+  database: System.get_env("DB_NAME_TEST") || "mydatabase_test",
+  port: String.to_integer(System.get_env("DB_PORT") || "5433"),
   pool: Ecto.Adapters.SQL.Sandbox,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true
 
 config :article_app, ArticleApp.ElasticsearchCluster,
-  url: "http://localhost:9200",
+  url: System.get_env("ELASTICSEARCH_URL") || "http://localhost:9200",
   json_library: Jason,
   api: Elasticsearch.API.HTTP
+
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
